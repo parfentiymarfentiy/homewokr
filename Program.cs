@@ -1,265 +1,180 @@
-﻿//using System;
+﻿using System;
 
-//class Program
-//{
-//    static void Main()
-//    {
-//        while (true)
-//        {
-//            Console.Clear();
-//            Console.WriteLine("МЕНЮ");
-//            Console.WriteLine("1. FizzBuzz");
-//            Console.WriteLine("2. Відсоток від числа");
-//            Console.WriteLine("3. Число з чотирьох цифр");
-//            Console.WriteLine("4. Обмін цифр у шестизначному числі");
-//            Console.WriteLine("5. Визначення сезону та дня тижня");
-//            Console.WriteLine("6. Конвертер температури");
-//            Console.WriteLine("7. Парні числа в діапазоні");
-//            Console.WriteLine("8. Число Армстронга");
-//            Console.WriteLine("9. Досконале число");
-//            Console.WriteLine("0. Вихід");
-//            Console.Write("Вибір: ");
-//            string choice = Console.ReadLine();
+class Program
+{
+    static void Main()
+    {
+        while (true)
+        {
+            Console.Clear();
+            Console.WriteLine("МЕНЮ");
+            Console.WriteLine("1. Стиснути масив (видалити 0)");
+            Console.WriteLine("2. Від'ємні елементи спочатку");
+            Console.WriteLine("3. Порахувати кількість входжень числа");
+            Console.WriteLine("4. Поміняти місцями стовпці матриці");
+            Console.WriteLine("0. Вихід");
+            Console.Write("Вибір: ");
+            string choice = Console.ReadLine();
 
-//            Console.Clear();
+            Console.Clear();
 
-//            switch (choice)
-//            {
-//                case "1":
-//                    Task1();
-//                    break;
-//                case "2":
-//                    Task2();
-//                    break;
-//                case "3":
-//                    Task3();
-//                    break;
-//                case "4":
-//                    Task4();
-//                    break;
-//                case "5":
-//                    Task5();
-//                    break;
-//                case "6":
-//                    Task6();
-//                    break;
-//                case "7":
-//                    Task7();
-//                    break;
-//                case "8":
-//                    Task8();
-//                    break;
-//                case "9":
-//                    Task9();
-//                    break;
-//                case "0":
-//                    return;
-//            }
+            switch (choice)
+            {
+                case "1":
+                    Task1();
+                    break;
+                case "2":
+                    Task2();
+                    break;
+                case "3":
+                    Task3();
+                    break;
+                case "4":
+                    Task4();
+                    break;
+                case "0":
+                    return;
+            }
 
-//            Console.WriteLine("\nНатисніть будь-яку клавішу...");
-//            Console.ReadKey();
-//        }
-//    }
+            Console.WriteLine("\nНатисніть будь-яку клавішу...");
+            Console.ReadKey();
+        }
+    }
 
-//    static void Task1()
-//    {
-//        Console.Write("Введіть число від 1 до 100: ");
-//        if (int.TryParse(Console.ReadLine(), out int num))
-//        {
-//            if (num < 1 || num > 100)
-//            {
-//                Console.WriteLine("Помилка");
-//            }
-//            else if (num % 3 == 0 && num % 5 == 0)
-//            {
-//                Console.WriteLine("Fizz Buzz");
-//            }
-//            else if (num % 3 == 0)
-//            {
-//                Console.WriteLine("Fizz");
-//            }
-//            else if (num % 5 == 0)
-//            {
-//                Console.WriteLine("Buzz");
-//            }
-//            else
-//            {
-//                Console.WriteLine(num);
-//            }
-//        }
-//        else
-//        {
-//            Console.WriteLine("Помилка");
-//        }
-//    }
+    static void Task1()
+    {
+        int[] array = { 1, 0, 2, 0, 3, 0, 4, 5 };
+        Console.WriteLine("Початковий масив:");
+        PrintArray(array);
 
-//    static void Task2()
-//    {
-//        Console.Write("Введіть число: ");
-//        double number = Convert.ToDouble(Console.ReadLine());
-//        Console.Write("Введіть відсоток: ");
-//        double percent = Convert.ToDouble(Console.ReadLine());
-//        double result = (number * percent) / 100;
-//        Console.WriteLine($"Результат: {result}");
-//    }
+        int count = 0;
+        for (int i = 0; i < array.Length; i++)
+        {
+            if (array[i] != 0)
+            {
+                array[count] = array[i];
+                count++;
+            }
+        }
 
-//    static void Task3()
-//    {
-//        Console.WriteLine("Введіть чотири цифри:");
-//        string numberStr = "";
-//        for (int i = 1; i <= 4; i++)
-//        {
-//            Console.Write($"Цифра {i}: ");
-//            numberStr += Console.ReadLine();
-//        }
-//        Console.WriteLine($"Число: {numberStr}");
-//    }
+        for (int i = count; i < array.Length; i++)
+        {
+            array[i] = -1;
+        }
 
-//    static void Task4()
-//    {
-//        Console.Write("Введіть шестизначне число: ");
-//        string number = Console.ReadLine();
+        Console.WriteLine("\nРезультат:");
+        PrintArray(array);
+    }
 
-//        if (number.Length != 6 || !int.TryParse(number, out _))
-//        {
-//            Console.WriteLine("Помилка");
-//            return;
-//        }
+    static void Task2()
+    {
+        int[] array = { 3, -2, 5, 0, -1, 4, -3, 2 };
+        Console.WriteLine("Початковий масив:");
+        PrintArray(array);
 
-//        Console.Write("Введіть перший розряд (1-6): ");
-//        int pos1 = Convert.ToInt32(Console.ReadLine()) - 1;
-//        Console.Write("Введіть другий розряд (1-6): ");
-//        int pos2 = Convert.ToInt32(Console.ReadLine()) - 1;
+        int[] result = new int[array.Length];
+        int index = 0;
 
-//        if (pos1 < 0 || pos1 > 5 || pos2 < 0 || pos2 > 5)
-//        {
-//            Console.WriteLine("Помилка");
-//            return;
-//        }
+        for (int i = 0; i < array.Length; i++)
+        {
+            if (array[i] < 0)
+            {
+                result[index] = array[i];
+                index++;
+            }
+        }
 
-//        char[] digits = number.ToCharArray();
-//        char temp = digits[pos1];
-//        digits[pos1] = digits[pos2];
-//        digits[pos2] = temp;
+        for (int i = 0; i < array.Length; i++)
+        {
+            if (array[i] >= 0)
+            {
+                result[index] = array[i];
+                index++;
+            }
+        }
 
-//        Console.WriteLine($"Результат: {new string(digits)}");
-//    }
+        Console.WriteLine("\nРезультат:");
+        PrintArray(result);
+    }
 
-//    static void Task5()
-//    {
-//        Console.Write("Введіть дату (дд.мм.рррр): ");
-//        string dateStr = Console.ReadLine();
+    static void Task3()
+    {
+        int[] array = { 1, 3, 5, 3, 7, 3, 9, 3, 2 };
+        Console.WriteLine("Масив:");
+        PrintArray(array);
 
-//        if (DateTime.TryParse(dateStr, out DateTime date))
-//        {
-//            string season = "";
-//            int month = date.Month;
+        Console.Write("\nВведіть число для пошуку: ");
+        int number = Convert.ToInt32(Console.ReadLine());
 
-//            if (month == 12 || month <= 2) season = "Winter";
-//            else if (month >= 3 && month <= 5) season = "Spring";
-//            else if (month >= 6 && month <= 8) season = "Summer";
-//            else season = "Autumn";
+        int count = 0;
+        for (int i = 0; i < array.Length; i++)
+        {
+            if (array[i] == number)
+            {
+                count++;
+            }
+        }
 
-//            string day = date.DayOfWeek.ToString();
+        Console.WriteLine($"Число {number} зустрічається {count} разів");
+    }
 
-//            Console.WriteLine($"{season} {day}");
-//        }
-//        else
-//        {
-//            Console.WriteLine("Помилка");
-//        }
-//    }
+    static void Task4()
+    {
+        int[,] matrix = {
+            { 1, 2, 3, 4 },
+            { 5, 6, 7, 8 },
+            { 9, 10, 11, 12 }
+        };
 
-//    static void Task6()
-//    {
-//        Console.WriteLine("1. Цельсій → Фаренгейт");
-//        Console.WriteLine("2. Фаренгейт → Цельсій");
-//        Console.Write("Вибір: ");
-//        string choice = Console.ReadLine();
+        Console.WriteLine("Початкова матрица 3x4:");
+        PrintMatrix(matrix);
 
-//        Console.Write("Введіть температуру: ");
-//        double temp = Convert.ToDouble(Console.ReadLine());
+        Console.Write("\nВведіть номер першого стовпця (1-4): ");
+        int col1 = Convert.ToInt32(Console.ReadLine()) - 1;
+        Console.Write("Введіть номер другого стовпця (1-4): ");
+        int col2 = Convert.ToInt32(Console.ReadLine()) - 1;
 
-//        if (choice == "1")
-//        {
-//            double f = (temp * 9 / 5) + 32;
-//            Console.WriteLine($"{temp}°C = {f}°F");
-//        }
-//        else if (choice == "2")
-//        {
-//            double c = (temp - 32) * 5 / 9;
-//            Console.WriteLine($"{temp}°F = {c}°C");
-//        }
-//    }
+        int rows = matrix.GetLength(0);
+        int cols = matrix.GetLength(1);
 
-//    static void Task7()
-//    {
-//        Console.Write("Введіть перше число: ");
-//        int a = Convert.ToInt32(Console.ReadLine());
-//        Console.Write("Введіть друге число: ");
-//        int b = Convert.ToInt32(Console.ReadLine());
+        if (col1 < 0 || col1 >= cols || col2 < 0 || col2 >= cols)
+        {
+            Console.WriteLine("Невірні номери стовпців");
+            return;
+        }
 
-//        int start = Math.Min(a, b);
-//        int end = Math.Max(a, b);
+        for (int i = 0; i < rows; i++)
+        {
+            int temp = matrix[i, col1];
+            matrix[i, col1] = matrix[i, col2];
+            matrix[i, col2] = temp;
+        }
 
-//        Console.WriteLine($"Парні числа від {start} до {end}:");
-//        for (int i = start; i <= end; i++)
-//        {
-//            if (i % 2 == 0)
-//            {
-//                Console.Write(i + " ");
-//            }
-//        }
-//        Console.WriteLine();
-//    }
+        Console.WriteLine("\nРезультат:");
+        PrintMatrix(matrix);
+    }
 
-//    static void Task8()
-//    {
-//        Console.Write("Введіть число: ");
-//        string numStr = Console.ReadLine();
-//        int n = numStr.Length;
-//        int number = Convert.ToInt32(numStr);
-//        int sum = 0;
-//        int temp = number;
+    static void PrintArray(int[] arr)
+    {
+        foreach (int num in arr)
+        {
+            Console.Write(num + " ");
+        }
+        Console.WriteLine();
+    }
 
-//        while (temp > 0)
-//        {
-//            int digit = temp % 10;
-//            sum += (int)Math.Pow(digit, n);
-//            temp /= 10;
-//        }
+    static void PrintMatrix(int[,] matrix)
+    {
+        int rows = matrix.GetLength(0);
+        int cols = matrix.GetLength(1);
 
-//        if (sum == number)
-//        {
-//            Console.WriteLine($"{number} - число Армстронга");
-//        }
-//        else
-//        {
-//            Console.WriteLine($"{number} - не число Армстронга");
-//        }
-//    }
-
-//    static void Task9()
-//    {
-//        Console.Write("Введіть число: ");
-//        int number = Convert.ToInt32(Console.ReadLine());
-//        int sum = 0;
-
-//        for (int i = 1; i < number; i++)
-//        {
-//            if (number % i == 0)
-//            {
-//                sum += i;
-//            }
-//        }
-
-//        if (sum == number)
-//        {
-//            Console.WriteLine($"{number} - досконале число");
-//        }
-//        else
-//        {
-//            Console.WriteLine($"{number} - не досконале число");
-//        }
-//    }
-//}
+        for (int i = 0; i < rows; i++)
+        {
+            for (int j = 0; j < cols; j++)
+            {
+                Console.Write(matrix[i, j] + "\t");
+            }
+            Console.WriteLine();
+        }
+    }
+}
